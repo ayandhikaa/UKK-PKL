@@ -2,14 +2,14 @@
 
 namespace App\Policies;
 
-use App\Models\Industri;
 use App\Models\User;
+use App\Models\Industri;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
 class IndustriPolicy
 {
     use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
@@ -50,44 +50,59 @@ class IndustriPolicy
         return $user->can('delete_industri');
     }
 
+    /**
+     * Determine whether the user can bulk delete.
+     */
     public function deleteAny(User $user): bool
     {
         return $user->can('delete_any_industri');
     }
 
     /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Industri $industri): bool
-    {
-        return $user->can('restore_industri');
-    }
-
-    public function restoreAny(User $user): bool
-    {
-        return $user->can('restore_any_industri');
-    }
-
-    public function replicate(User $user, Industri $industri): bool
-    {
-        return $user->can('replicate_industri');
-    }
-
-    public function reorder(User $user): bool
-    {
-        return $user->can('reorder_industri');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Industri $industri): bool
     {
         return $user->can('force_delete_industri');
     }
 
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
     public function forceDeleteAny(User $user): bool
     {
         return $user->can('force_delete_any_industri');
+    }
+
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, Industri $industri): bool
+    {
+        return $user->can('restore_industri');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_industri');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Industri $industri): bool
+    {
+        return $user->can('replicate_industri');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_industri');
     }
 }

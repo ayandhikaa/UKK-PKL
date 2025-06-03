@@ -7,6 +7,7 @@ use App\Models\Pkl;
 use App\Models\Siswa;
 use Livewire\Component;
 use App\Models\Industri;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class Create extends Component
@@ -50,14 +51,19 @@ class Create extends Component
             'selesai'     => 'required|date|after:mulai',
         ]);
     
-        // Hitung durasi antara mulai dan selesai
-        $mulai = \Carbon\Carbon::parse($this->mulai);
-        $selesai = \Carbon\Carbon::parse($this->selesai);
+        $mulai = Carbon::createFromFormat('Y-m-d', $this->mulai);
+        $selesai = Carbon::createFromFormat('Y-m-d', $this->selesai);
+        
+        if ($selesai->lessThan($mulai)) {
+            session()->flash('error', 'Tanggal selesai harus setelah tanggal mulai.');
+            return;
+        }
+        
         $diffInDays = $selesai->diffInDays($mulai);
-    
+        
         if ($diffInDays < 90) {
             session()->flash('error', 'Durasi PKL minimal 90 hari.');
-            return;  // hentikan proses simpan
+            return;
         }
     
         try {

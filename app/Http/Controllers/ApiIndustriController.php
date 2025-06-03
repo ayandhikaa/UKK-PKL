@@ -26,8 +26,8 @@ class ApiIndustriController extends Controller
     {
         $Industri = new Industri();
         $Industri->nama = $request->nama;
-        $Industri->nip = $request->nip;
-        $Industri->gender = $request->gender;
+        $Industri->bidang_usaha = $request->bidang_usaha;
+        $Industri->website = $request->website;
         $Industri->alamat = $request->alamat;
         $Industri->kontak = $request->kontak;
         $Industri->email = $request->email;
@@ -65,8 +65,8 @@ class ApiIndustriController extends Controller
     {
         $Industri = Industri::find($id);
         $Industri->nama = $request->nama;
-        $Industri->nip = $request->nip;
-        $Industri->gender = $request->gender;
+        $Industri->bidang_usaha = $request->bidang_usaha;
+        $Industri->website = $request->website;
         $Industri->alamat = $request->alamat;
         $Industri->kontak = $request->kontak;
         $Industri->email = $request->email;

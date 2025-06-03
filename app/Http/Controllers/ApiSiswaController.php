@@ -26,11 +26,12 @@ class ApiSiswaController extends Controller
     {
         $Siswa = new Siswa();
         $Siswa->nama = $request->nama;
-        $Siswa->nip = $request->nip;
+        $Siswa->nis = $request->nis;
         $Siswa->gender = $request->gender;
         $Siswa->alamat = $request->alamat;
         $Siswa->kontak = $request->kontak;
         $Siswa->email = $request->email;
+        $Siswa->status_pkl = $request->status_pkl;
         $Siswa->save();
         return response()->json([
             'status' => 'success',
@@ -65,11 +66,12 @@ class ApiSiswaController extends Controller
     {
         $Siswa = Siswa::find($id);
         $Siswa->nama = $request->nama;
-        $Siswa->nip = $request->nip;
+        $Siswa->nis = $request->nis;
         $Siswa->gender = $request->gender;
         $Siswa->alamat = $request->alamat;
         $Siswa->kontak = $request->kontak;
         $Siswa->email = $request->email;
+        $Siswa->status_pkl = $request->status_pkl;
         $Siswa->save();
         return response()->json([
             'status' => 'success',

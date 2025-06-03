@@ -49,7 +49,7 @@ class IndustriResource extends Resource
                     ->required()
                     ->maxLength(255),
                 FileUpload::make('foto')
-                    ->label('Foto Siswa')
+                    ->label('Foto Industri')
                     ->image()
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
                     ->directory('siswa-fotos')

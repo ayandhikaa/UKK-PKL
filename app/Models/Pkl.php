@@ -21,5 +21,10 @@ class Pkl extends Model
     {
         return $this->belongsTo(Guru::class);
     }
+    public function pkls()
+    {
+        return $this->hasOne(Pkl::class);
+    }
+
 
 }

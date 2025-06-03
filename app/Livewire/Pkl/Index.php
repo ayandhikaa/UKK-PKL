@@ -31,7 +31,9 @@ class Index extends Component
 
     public function render()
     {
-        $query = Pkl::latest();
+        $siswa = Siswa::where('email', '=', $this->userMail)->first();
+        $query = Pkl::where('siswa_id', $siswa?->id)->latest();
+
     
         if (!empty($this->search)) {
             $query->where(function ($q) {
@@ -45,7 +47,9 @@ class Index extends Component
     
         return view('livewire.pkl.index', [
             'pkls' => $query->paginate($this->rowPerPage),
-            'siswa_login' => Siswa::where('email', '=', $this->userMail)->first(),
+            'siswa_login' => Siswa::with(['pkls.industri', 'pkls.guru'])
+                        ->where('email', '=', $this->userMail)
+                        ->first(),
             'industri' => Industri::all(),
             'guru' => Guru::all(),
         ]);

@@ -25,12 +25,11 @@ class ApiPklController extends Controller
     public function store(Request $request)
     {
         $Pkl = new Pkl();
-        $Pkl->nama = $request->nama;
-        $Pkl->nip = $request->nip;
-        $Pkl->gender = $request->gender;
-        $Pkl->alamat = $request->alamat;
-        $Pkl->kontak = $request->kontak;
-        $Pkl->email = $request->email;
+        $Pkl->siswa_id = $request->siswa_id;
+        $Pkl->industri_id = $request->industri_id;
+        $Pkl->guru_id = $request->guru_id;
+        $Pkl->mulai = $request->mulai;
+        $Pkl->selesai = $request->selesai;
         $Pkl->save();
         return response()->json([
             'status' => 'success',
@@ -64,12 +63,11 @@ class ApiPklController extends Controller
     public function update(Request $request, string $id)
     {
         $Pkl = Pkl::find($id);
-        $Pkl->nama = $request->nama;
-        $Pkl->nip = $request->nip;
-        $Pkl->gender = $request->gender;
-        $Pkl->alamat = $request->alamat;
-        $Pkl->kontak = $request->kontak;
-        $Pkl->email = $request->email;
+        $Pkl->siswa_id = $request->siswa_id;
+        $Pkl->industri_id = $request->industri_id;
+        $Pkl->guru_id = $request->guru_id;
+        $Pkl->mulai = $request->mulai;
+        $Pkl->selesai = $request->selesai;
         $Pkl->save();
         return response()->json([
             'status' => 'success',

@@ -21,4 +21,14 @@ class Guru extends Model
             default => 'Tidak diketahui',
         };
     }
+
+    protected static function booted()
+    {
+        static::updating(function ($guru) {
+            if ($guru->isDirty('email')) {
+                \App\Models\User::where('email', $guru->getOriginal('email'))
+                    ->update(['email' => $guru->email]);
+            }
+        });
+    }
 }

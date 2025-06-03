@@ -2,14 +2,14 @@
 
 namespace App\Policies;
 
-use App\Models\Pkl;
 use App\Models\User;
+use App\Models\Pkl;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
 class PklPolicy
 {
     use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
@@ -50,46 +50,59 @@ class PklPolicy
         return $user->can('delete_pkl');
     }
 
+    /**
+     * Determine whether the user can bulk delete.
+     */
     public function deleteAny(User $user): bool
     {
         return $user->can('delete_any_pkl');
     }
 
     /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Pkl $pkl): bool
-    {
-        return $user->can('restore_pkl');
-    }
-
-    public function restoreAny(User $user): bool
-    {
-        return $user->can('restore_any_pkl');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Pkl $pkl): bool
     {
         return $user->can('force_delete_pkl');
     }
 
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
     public function forceDeleteAny(User $user): bool
     {
         return $user->can('force_delete_any_pkl');
-    }  
-    
+    }
+
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, Pkl $pkl): bool
+    {
+        return $user->can('restore_pkl');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_pkl');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
     public function replicate(User $user, Pkl $pkl): bool
     {
         return $user->can('replicate_pkl');
     }
 
+    /**
+     * Determine whether the user can reorder.
+     */
     public function reorder(User $user): bool
     {
         return $user->can('reorder_pkl');
     }
-
-    
 }

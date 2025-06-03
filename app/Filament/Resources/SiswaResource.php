@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Notifications\Notification;
 use Filament\Forms\Components\FileUpload;
 
 class SiswaResource extends Resource
@@ -58,7 +59,7 @@ class SiswaResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('alamat')
+                Forms\Components\TextInput::make('alamat')
                     ->required()
                     ->columnSpanFull()
                     ->maxLength(255),
@@ -124,11 +125,27 @@ class SiswaResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
-                    ->before(function ($records) {
+                    ->action(function ($records) {
                         foreach ($records as $record) {
-                            if ($record->pkls()->exists()) {
-                                throw new \Exception("Beberapa siswa memiliki data PKL, tidak dapat dihapus.");
+                            try {
+                                if ($record->pkls()->exists()) {
+                                    throw new \Exception("Siswa {$record->nama} tidak dapat dihapus karena memiliki data PKL.");
+                                }
+                            $record->delete();
+
+                            Notification::make()
+                            ->title("Siswa {$record->nama} berhasil dihapus.")
+                            ->success()
+                            ->send();
+        
+                            } catch (\Throwable $e) {
+                                Notification::make()
+                                    ->title("Gagal menghapus {$record->nama}")
+                                    ->body($e->getMessage())
+                                    ->danger()
+                                    ->send();
                             }
+
                         }
                     }),
                 ]),

@@ -96,7 +96,7 @@
                                         }
                                     @endphp
                                     <tr class="border-b border-gray-300 hover:bg-gray-50 text-center">
-                                        <th class="px-6 py-4">{{ $pkl->siswa->nama }}</th>
+                                        <th class="px-6 py-4">{{ $siswa_login->nama }}</th>
                                         <td class="px-6 py-4">{{ $pkl->industri->nama }}</td>
                                         <td class="px-6 py-4">
                                             @if ($pkl->guru)
@@ -107,8 +107,9 @@
                                         </td>
                                         <td class="px-6 py-4">{{ $pkl->mulai }}</td>
                                         <td class="px-6 py-4">{{ $pkl->selesai }}</td>
-                                        <td class="px-6 py-4">{{ $selisihHari }}</td>
+                                        <td class="px-6 py-4">{{ $selisihHari }} hari</td>
                                     </tr>
+
                                 @endforeach
                             </tbody>
                         </table>

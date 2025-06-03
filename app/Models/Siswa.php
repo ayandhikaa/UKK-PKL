@@ -32,4 +32,14 @@ class Siswa extends Model
         };
     }
 
+    protected static function booted()
+    {
+        static::updating(function ($siswa) {
+            if ($siswa->isDirty('email')) {
+                \App\Models\User::where('email', $siswa->getOriginal('email'))
+                    ->update(['email' => $siswa->email]);
+            }
+        });
+    }
+
 }

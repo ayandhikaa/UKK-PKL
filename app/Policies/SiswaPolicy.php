@@ -2,14 +2,14 @@
 
 namespace App\Policies;
 
-use App\Models\Siswa;
 use App\Models\User;
+use App\Models\Siswa;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
 class SiswaPolicy
 {
     use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
@@ -50,44 +50,59 @@ class SiswaPolicy
         return $user->can('delete_siswa');
     }
 
+    /**
+     * Determine whether the user can bulk delete.
+     */
     public function deleteAny(User $user): bool
     {
         return $user->can('delete_any_siswa');
     }
 
     /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Siswa $siswa): bool
-    {
-        return $user->can('restore_siswa');
-    }
-
-    public function restoreAny(User $user): bool
-    {
-        return $user->can('restore_any_siswa');
-    }
-
-    public function replicate(User $user, Siswa $siswa): bool
-    {
-        return $user->can('replicate_siswa');
-    }
-
-    public function reorder(User $user): bool
-    {
-        return $user->can('reorder_siswa');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Siswa $siswa): bool
     {
         return $user->can('force_delete_siswa');
     }
 
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
     public function forceDeleteAny(User $user): bool
     {
         return $user->can('force_delete_any_siswa');
+    }
+
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, Siswa $siswa): bool
+    {
+        return $user->can('restore_siswa');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_siswa');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Siswa $siswa): bool
+    {
+        return $user->can('replicate_siswa');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_siswa');
     }
 }
